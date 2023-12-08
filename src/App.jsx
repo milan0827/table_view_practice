@@ -11,7 +11,7 @@ function App() {
   }
 
   return (
-    <div className="shadow-black-500 relative flex h-[100vh] w-full flex-col items-center justify-start bg-gray-100 p-20 shadow-2xl">
+    <div className="shadow-black-500 relative flex h-screen w-full flex-col items-center justify-start bg-gray-100 p-20 shadow-2xl">
       <Header />
       <Table onOpenModal={() => setShowModal(true)} />
       {showModal && (
