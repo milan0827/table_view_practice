@@ -1,4 +1,4 @@
-function Button({ children, type, onOpenModal }) {
+export function Button({ children, type, onOpenModal }) {
   const buttonStyles = "rounded-md px-4 py-1 font-semibold text-white ";
 
   const styles = {
@@ -14,5 +14,3 @@ function Button({ children, type, onOpenModal }) {
     </button>
   );
 }
-
-export default Button;
