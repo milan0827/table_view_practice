@@ -1,4 +1,4 @@
-function Status({ status, type }) {
+function Status({ status, type = "No Status" }) {
   const statusStyle = "inline-block rounded-md  py-[0.1rem] font-semibold ";
 
   const styles = {
