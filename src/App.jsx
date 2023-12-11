@@ -1,17 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Container from "./components/Container";
-import Error from "./components/Error";
+import InvalidRouteError from "./pages/InvalidRouteError";
+import Home from "./pages/Home";
 import Edit from "./pages/Edit";
-import AppLayout from "./components/AppLayout";
+import AppLayout from "./pages/AppLayout";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
-    errorElement: <Error />,
+    errorElement: <InvalidRouteError />,
     children: [
       {
         path: "/",
-        element: <Container />,
+        element: <Home />,
       },
       {
         path: "/edit",
