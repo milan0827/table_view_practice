@@ -1,5 +1,6 @@
-import { Button } from "../Button";
+import { Button } from "../Button/Button";
 import Status from "../Status";
+import LinkButton from "../Button/LinkButton";
 
 const currencyFormat = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -33,7 +34,9 @@ function TableRow({ data, onOpenModal }) {
       </td>
       <td>{currencyFormat.format(+data.amount)}</td>
       <td className="flex items-center justify-center gap-4 text-stone-300 ">
-        <Button type="edit">✏️ Edit</Button>
+        <LinkButton to="edit" type="edit">
+          ✏️ Edit
+        </LinkButton>
         <Button type="delete" onOpenModal={onOpenModal}>
           🗑️ Delete
         </Button>
