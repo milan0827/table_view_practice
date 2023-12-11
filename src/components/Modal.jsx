@@ -1,4 +1,4 @@
-import { Button } from "./Button";
+import { Button } from "./Button/Button";
 
 function Modal({ onOpenModal }) {
   return (
@@ -20,7 +20,7 @@ function Modal({ onOpenModal }) {
         </div>
       </div>
 
-      <span onClick={onOpenModal} className="absolute inset-0 "></span>
+      <span onClick={onOpenModal} className="overlay absolute inset-0 "></span>
     </>
   );
 }
