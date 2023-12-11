@@ -1,26 +1,28 @@
-import { useState } from "react";
-import Modal from "./components/Modal";
-import Header from "./components/Header";
-import Table from "./components/Table/Table";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Container from "./components/Container";
+import Error from "./components/Error";
+import Edit from "./pages/Edit";
+import AppLayout from "./components/AppLayout";
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element: <Container />,
+      },
+      {
+        path: "/edit",
+        element: <Edit />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-
-  function onOpenModal() {
-    setShowModal((open) => !open);
-  }
-
-  return (
-    <div className="shadow-black-500 relative flex h-screen w-full flex-col items-center justify-start bg-gray-100 p-20 shadow-2xl">
-      <Header />
-      <Table onOpenModal={() => setShowModal(true)} />
-      {showModal && (
-        <>
-          <Modal onOpenModal={onOpenModal} />
-        </>
-      )}
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
