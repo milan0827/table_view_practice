@@ -1,10 +1,11 @@
 import { GiHamburgerMenu } from "react-icons/gi";
+import LinkButton from "./Button/LinkButton";
 
-function Header() {
+function TableHeader() {
   const Mapper = ({ data }) => {
     return data.map((key) => (
       <span key={key}>
-        <GiHamburgerMenu className="text-xl" />
+        <GiHamburgerMenu className="mt-4 text-xl" />
       </span>
     ));
   };
@@ -18,10 +19,13 @@ function Header() {
         </label>
       </div>
       <div className="flex items-center justify-between gap-2">
+        <LinkButton type="submit" to="form">
+          + Add new
+        </LinkButton>
         <Mapper data={[1, 2, 3]} />
       </div>
     </header>
   );
 }
 
-export default Header;
+export default TableHeader;
