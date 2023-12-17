@@ -1,11 +1,9 @@
-import { tableData } from "../../data";
 import TableRow from "./TableRow";
-// import { tableData } from "../../data";
 
-function Table({ onOpenModal }) {
+function Table({ datas, handleDelete }) {
   return (
-    <table className="w-full border-separate border-spacing-4 border border-stone-300 text-center">
-      <thead>
+    <table className="w-full border-separate border-spacing-4 border border-stone-300 text-left">
+      <thead className="text-left">
         <tr>
           <th>
             <input type="checkbox" id="invoiceTitle" />
@@ -21,8 +19,12 @@ function Table({ onOpenModal }) {
         </tr>
       </thead>
       <tbody>
-        {tableData.map((data) => (
-          <TableRow onOpenModal={onOpenModal} data={data} key={data.invoice} />
+        {datas.map((data) => (
+          <TableRow
+            data={data}
+            key={data.invoice}
+            handleDelete={handleDelete}
+          />
         ))}
       </tbody>
     </table>
