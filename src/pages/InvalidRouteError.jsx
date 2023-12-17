@@ -1,7 +1,7 @@
 import AppHeader from "../components/AppHeader";
 
 function InvalidRouteError() {
-  return <AppHeader type="error">Route not found!!!</AppHeader>;
+  return <AppHeader type="error" title="Route not found!!!" />;
 }
 
 export default InvalidRouteError;
