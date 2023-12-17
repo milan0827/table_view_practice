@@ -1,13 +1,26 @@
 import { Button } from "../Button/Button";
 import Status from "../Status";
-import LinkButton from "../Button/LinkButton";
+import Modal from "../Modal";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const currencyFormat = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
-function TableRow({ data, onOpenModal }) {
+function TableRow({ data, handleDelete }) {
+  const navigate = useNavigate();
+
+  const [showModal, setShowModal] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  function handleOpenModal() {
+    setShowModal((open) => !open);
+  }
+
+  // handleUpdate(data.invoice);
+
   const InvoiceStatus = ({ data }) => {
     switch (data.status) {
       case "Paid":
@@ -19,11 +32,20 @@ function TableRow({ data, onOpenModal }) {
     }
   };
 
+  function handleClicked() {
+    setClicked((tick) => !tick);
+  }
+
+  const editHandler = (e, data) => {
+    e.preventDefault();
+    navigate(`form/edit/${data.invoice}`, { state: { data } });
+  };
+
   return (
-    <tr>
-      <td className="text-blue-600">
-        <input type="checkbox" id="dataInvoice" />
-        <label htmlFor="dataInvoice" className="ml-2">
+    <tr className={`${clicked ? "line-through" : ""} text-left`}>
+      <td className=" text-blue-600">
+        <input type="checkbox" id={data.invoice} onClick={handleClicked} />
+        <label htmlFor={data.invoice} className="ml-2">
           {data.invoice}
         </label>
       </td>
@@ -33,12 +55,25 @@ function TableRow({ data, onOpenModal }) {
         <InvoiceStatus data={data} />
       </td>
       <td>{currencyFormat.format(+data.amount)}</td>
-      <td className="flex items-center justify-center gap-4 text-stone-300 ">
-        <LinkButton to="edit" type="edit">
-          ✏️ Edit
-        </LinkButton>
-        <Button type="delete" onOpenModal={onOpenModal}>
-          🗑️ Delete
+      <td className="justify-left flex items-center gap-4 text-stone-300 ">
+        <Button type="edit" onClick={(e) => editHandler(e, data)}>
+          Edit
+        </Button>
+        {showModal && (
+          <Modal
+            data={data}
+            handleOpenModal={handleOpenModal}
+            setShowModal={setShowModal}
+            handleDelete={handleDelete}
+            key={data}
+          />
+        )}
+        <Button
+          disabled={clicked}
+          onClick={() => setShowModal(true)}
+          type="delete"
+        >
+          Delete
         </Button>
       </td>
     </tr>
