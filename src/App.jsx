@@ -1,21 +1,23 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import InvalidRouteError from "./pages/InvalidRouteError";
+import AddNewForm from "./components/Form/AddNewForm";
 import Home from "./pages/Home";
-import Edit from "./pages/Edit";
-import AppLayout from "./pages/AppLayout";
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
-    errorElement: <InvalidRouteError />,
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "form",
+    element: <AddNewForm />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        index: true,
+        element: <AddNewForm />,
       },
       {
-        path: "/edit",
-        element: <Edit />,
+        path: "edit/:slug",
+        element: <AddNewForm />,
       },
     ],
   },
