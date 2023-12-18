@@ -22,11 +22,11 @@ function TableRow({ data, handleDelete }) {
   const InvoiceStatus = ({ data }) => {
     switch (data.status) {
       case "Paid":
-        return <Status type="paid" status={data.status} />;
+        return <Status status={data.status} />;
       case "Pending":
-        return <Status type="pending" status={data.status} />;
+        return <Status status={data.status} />;
       case "Unpaid":
-        return <Status type="unpaid" status={data.status} />;
+        return <Status status={data.status} />;
     }
   };
 
