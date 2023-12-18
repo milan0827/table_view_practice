@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import AddNewForm from "./components/Form/AddNewForm";
 import Home from "./pages/Home";
+import Form from "./components/Form";
 
 const router = createBrowserRouter([
   {
@@ -9,15 +9,15 @@ const router = createBrowserRouter([
   },
   {
     path: "form",
-    element: <AddNewForm />,
+    element: <Form />,
     children: [
       {
         index: true,
-        element: <AddNewForm />,
+        element: <Form />,
       },
       {
         path: "edit/:slug",
-        element: <AddNewForm />,
+        element: <Form />,
       },
     ],
   },
