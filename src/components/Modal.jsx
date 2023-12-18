@@ -5,7 +5,7 @@ function Modal({ data, handleDelete, handleOpenModal, setShowModal }) {
     <>
       <div
         key={data.invoice}
-        className="absolute right-[40%] top-1/2 z-20 flex flex-col rounded-md bg-gray-200 "
+        className="absolute right-[37%] top-1/2 z-20 flex flex-col rounded-md bg-gray-200 "
       >
         <div className="flex flex-col px-4">
           <span
