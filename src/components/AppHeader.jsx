@@ -1,5 +1,6 @@
 function AppHeader({ type, title }) {
-  const base = "text-5xl font-semibold uppercase text-stone-800 text-center ";
+  const base =
+    "text-5xl font-semibold uppercase text-stone-800 text-center py-10 ";
 
   const styles = {
     error: base + " text-red-500",
