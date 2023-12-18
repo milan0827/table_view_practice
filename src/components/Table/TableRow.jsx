@@ -19,8 +19,6 @@ function TableRow({ data, handleDelete }) {
     setShowModal((open) => !open);
   }
 
-  // handleUpdate(data.invoice);
-
   const InvoiceStatus = ({ data }) => {
     switch (data.status) {
       case "Paid":
@@ -56,10 +54,10 @@ function TableRow({ data, handleDelete }) {
       </td>
       <td>{currencyFormat.format(+data.amount)}</td>
       <td className="justify-left flex items-center gap-4 text-stone-300 ">
-        <Button type="edit" onClick={(e) => editHandler(e, data)}>
+        <Button type="confirm" onClick={(e) => editHandler(e, data)}>
           Edit
         </Button>
-        {showModal && (
+        {showModal ? (
           <Modal
             data={data}
             handleOpenModal={handleOpenModal}
@@ -67,7 +65,7 @@ function TableRow({ data, handleDelete }) {
             handleDelete={handleDelete}
             key={data}
           />
-        )}
+        ) : null}
         <Button
           disabled={clicked}
           onClick={() => setShowModal(true)}
