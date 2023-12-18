@@ -1,13 +1,19 @@
-function Status({ status, type = "No Status" }) {
-  const statusStyle = "inline-block rounded-md  py-[0.1rem] font-semibold ";
-
-  const styles = {
-    paid: statusStyle + "text-green-400 bg-green-100 px-8",
-    pending: statusStyle + "text-yellow-400 bg-yellow-100 px-[1rem]",
-    unpaid: statusStyle + "text-red-400 bg-red-100 px-5",
-  };
-
-  return <span className={styles[type]}>{status}</span>;
+function Status({ status }) {
+  return (
+    <span
+      className={`
+        ${
+          status === "Paid"
+            ? "text-paid-text-color bg-paid-bg-color p-paid-padding"
+            : status === "Unpaid"
+              ? "text-unpaid-text-color bg-unpaid-bg-color p-unpaid-padding"
+              : "text-pending-text-color bg-pending-bg-color p-pending-padding"
+        } inline-block rounded-md  py-[0.1rem] font-semibold
+      `}
+    >
+      {status}
+    </span>
+  );
 }
 
 export default Status;
