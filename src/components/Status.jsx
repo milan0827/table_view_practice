@@ -4,10 +4,10 @@ function Status({ status }) {
       className={`
         ${
           status === "Paid"
-            ? "text-paid-text-color bg-paid-bg-color p-paid-padding"
+            ? "bg-paid-bg-color p-8 text-paid-text-color"
             : status === "Unpaid"
-              ? "text-unpaid-text-color bg-unpaid-bg-color p-unpaid-padding"
-              : "text-pending-text-color bg-pending-bg-color p-pending-padding"
+              ? "bg-unpaid-bg-color p-5 text-unpaid-text-color"
+              : "bg-pending-bg-color p-4 text-pending-text-color"
         } inline-block rounded-md  py-[0.1rem] font-semibold
       `}
     >
