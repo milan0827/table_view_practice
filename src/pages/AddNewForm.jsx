@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../components/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../components/AppHeader";
+import Message from "../components/Message";
 
 function AddNewForm() {
   const initialState = {
@@ -14,6 +15,7 @@ function AddNewForm() {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [isSubmitting, setIsSubmittng] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,7 +56,10 @@ function AddNewForm() {
     }
 
     localStorage.setItem("DATA", JSON.stringify(data));
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 2 * 1000);
+    setIsSubmittng(true);
   }
 
   return (
@@ -120,7 +125,15 @@ function AddNewForm() {
             className="w-full rounded-md border-none bg-stone-100 px-4 py-2 outline-none transition-all duration-300 hover:border-none focus:shadow-md focus:shadow-stone-300 active:outline-none"
           />
         </div>
-        <Button type="submit">{isEditMode ? "Edit" : "Submit"}</Button>
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className={
+            isSubmitting ? "cursor-not-allowed bg-gray-300 text-stone-300" : ""
+          }
+        >
+          {isEditMode ? "Edit" : "Submit"}
+        </Button>
       </form>
     </>
   );
