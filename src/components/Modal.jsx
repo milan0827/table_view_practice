@@ -32,7 +32,6 @@ function Modal({ data, handleDelete, handleOpenModal, setShowModal }) {
                   handleDelete(data.invoice);
                   handleOpenModal(false);
                   setIsDelete(true);
-                  console.log(isDelete);
                 }}
               >
                 Yes
