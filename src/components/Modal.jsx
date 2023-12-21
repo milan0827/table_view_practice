@@ -1,11 +1,15 @@
+import { useInvoice } from "../contexts/invoiceContext";
 import { Button } from "./Button/Button";
 
 function Modal({ data, handleDelete, handleOpenModal, setShowModal }) {
+  const { isDelete, setIsDelete } = useInvoice();
+  console.log(isDelete);
+
   return (
     <>
       <div
         key={data.invoice}
-        className="absolute right-[37%] top-1/2 z-20 flex flex-col rounded-md bg-gray-200 "
+        className="fixed right-[37%] top-[12rem] z-20 flex flex-col rounded-md bg-gray-200 "
       >
         <div className="flex flex-col px-4">
           <span
@@ -27,6 +31,8 @@ function Modal({ data, handleDelete, handleOpenModal, setShowModal }) {
                 onClick={() => {
                   handleDelete(data.invoice);
                   handleOpenModal(false);
+                  setIsDelete(true);
+                  console.log(isDelete);
                 }}
               >
                 Yes
@@ -41,7 +47,7 @@ function Modal({ data, handleDelete, handleOpenModal, setShowModal }) {
 
       <span
         onClick={() => setShowModal(false)}
-        className="overlay absolute inset-0 h-screen"
+        className="overlay fixed inset-0 h-screen"
       ></span>
     </>
   );
