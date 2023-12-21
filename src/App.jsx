@@ -1,4 +1,4 @@
-import Message from "./components/Message";
+import Notification from "./components/Notification";
 import { useInvoice } from "./contexts/invoiceContext";
 import AppRouter from "./routes";
 
@@ -7,9 +7,15 @@ function App() {
   return (
     <>
       <AppRouter />
-      {isEditMode ? <Message>Invoice hase been updated</Message> : null}
-      {isSubmitting ? <Message>Invoice successfully created</Message> : null}
-      {isDelete ? <Message>Invoice Deleted successfully</Message> : null}
+      {isEditMode ? (
+        <Notification>Invoice hase been updated</Notification>
+      ) : null}
+      {isSubmitting ? (
+        <Notification>Invoice successfully created</Notification>
+      ) : null}
+      {isDelete ? (
+        <Notification>Invoice Deleted successfully</Notification>
+      ) : null}
     </>
   );
 }
