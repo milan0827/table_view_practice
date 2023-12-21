@@ -1,30 +1,17 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
-import Form from "./components/Form";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "form",
-    element: <Form />,
-    children: [
-      {
-        index: true,
-        element: <Form />,
-      },
-      {
-        path: "edit/:slug",
-        element: <Form />,
-      },
-    ],
-  },
-]);
+import Message from "./components/Message";
+import { useInvoice } from "./contexts/invoiceContext";
+import AppRouter from "./routes";
 
 function App() {
-  return <RouterProvider router={router} />;
+  const { isSubmitting, isDelete, isEditMode } = useInvoice();
+  return (
+    <>
+      <AppRouter />
+      {isEditMode ? <Message>Invoice hase been updated</Message> : null}
+      {isSubmitting ? <Message>Invoice successfully created</Message> : null}
+      {isDelete ? <Message>Invoice Deleted successfully</Message> : null}
+    </>
+  );
 }
 
 export default App;
