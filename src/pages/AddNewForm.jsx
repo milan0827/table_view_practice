@@ -2,30 +2,26 @@ import { useEffect, useState } from "react";
 import { Button } from "../components/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import AppHeader from "../components/AppHeader";
-import Message from "../components/Message";
+import { useInvoice } from "../contexts/invoiceContext";
 
 function AddNewForm() {
-  const initialState = {
-    invoice: crypto.randomUUID(),
-    invoiceDate: "",
-    dueDate: "",
-    status: ["Paid", "Unpaid", "Pending"],
-    amount: "0",
-    date: Date.now(),
-  };
+  const {
+    setIsSubmitting,
+    isSubmitting,
+    setIsEditMode,
+    setIsDelete,
+    initialState,
+  } = useInvoice();
 
   const [formData, setFormData] = useState(initialState);
-  const [isSubmitting, setIsSubmittng] = useState(false);
-
+  const [formEditMode, setFormEditMode] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const editData = location?.state?.data;
 
-  const [isEditMode, setIsEditMode] = useState(false);
-
   useEffect(() => {
     if (location?.state?.data) {
-      setIsEditMode(true);
+      setFormEditMode(true);
       setFormData({
         invoice: editData.invoice,
         invoiceDate: editData.invoiceDate,
@@ -51,20 +47,28 @@ function AddNewForm() {
 
     if (existingIndex !== -1) {
       data[existingIndex] = { ...data[existingIndex], ...formData };
+      setIsSubmitting(false);
+      setIsEditMode(true);
+      setIsDelete(false);
+      navigate("/");
     } else {
       data.push({ ...formData });
+      setIsDelete(false);
+      setIsEditMode(false);
+      setIsSubmitting(true);
+      navigate("/");
     }
 
     localStorage.setItem("DATA", JSON.stringify(data));
-    setTimeout(() => {
-      navigate("/");
-    }, 2 * 1000);
-    setIsSubmittng(true);
   }
 
   return (
     <>
-      <AppHeader title="Add new Invoice" type="noError" />
+      {!formEditMode ? (
+        <AppHeader title="Add invoice invoice" type="noError" />
+      ) : (
+        <AppHeader title="Update invoice" type="noError" />
+      )}
       <form
         className="flex w-1/2 flex-col items-start justify-center gap-4 rounded-md bg-gray-200 p-10 shadow-lg shadow-stone-400"
         onSubmit={handleAddSubmit}
@@ -105,11 +109,14 @@ function AddNewForm() {
         <div className="flex w-full flex-col">
           <label className="text-sm font-semibold uppercase ">Status</label>
           <select
+            defaultValue={"DEFAULT"}
             name="status"
             onChange={(e) => handleChange(e)}
             className="w-full rounded-md border-none bg-stone-100 px-4 py-2 outline-none transition-all duration-300 hover:border-none focus:shadow-md focus:shadow-stone-300 active:outline-none"
           >
-            <option value="Status">Select status</option>
+            <option value="DEFAULT" disabled>
+              Select status
+            </option>
             <option value="Paid">Paid</option>
             <option value="Unpaid">Unpaid</option>
             <option value="Pending">Pending</option>
@@ -132,7 +139,7 @@ function AddNewForm() {
             isSubmitting ? "cursor-not-allowed bg-gray-300 text-stone-300" : ""
           }
         >
-          {isEditMode ? "Edit" : "Submit"}
+          {formEditMode ? "Edit" : "Submit"}
         </Button>
       </form>
     </>
