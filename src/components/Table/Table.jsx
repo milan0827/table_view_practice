@@ -2,7 +2,7 @@ import TableRow from "./TableRow";
 
 function Table({ datas, handleDelete }) {
   return (
-    <table className="w-full border-separate border-spacing-4 border border-stone-300 text-left ">
+    <table className="w-full border-separate border-spacing-4 border border-stone-300 text-left">
       <thead className="text-left">
         <tr>
           <th>
