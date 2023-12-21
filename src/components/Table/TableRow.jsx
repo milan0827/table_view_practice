@@ -54,7 +54,12 @@ function TableRow({ data, handleDelete }) {
       </td>
       <td>{currencyFormat.format(+data.amount)}</td>
       <td className="justify-left flex items-center gap-4 text-stone-300 ">
-        <Button type="confirm" onClick={(e) => editHandler(e, data)}>
+        <Button
+          type="confirm"
+          onClick={(e) => {
+            editHandler(e, data);
+          }}
+        >
           Edit
         </Button>
         {showModal ? (
